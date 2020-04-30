@@ -2,3 +2,12 @@
 .idea/
 
 venv/
+/env/
+
+onix/onix/__pycache__/
+
+onix/locations/__pycache__/
+
+onix/locations/migrations/__pycache__/
+
+onix/media/
