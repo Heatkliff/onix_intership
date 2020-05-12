@@ -4,8 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('static_link/', views.static_link, name='static_link'),
-    path('dynamic/<variable>', views.dynamic, name='dynamic'),
-    path('media_picture', views.media_picture, name='media_picture'),
-    path('bootstrap_link', views.bootstrap_link, name='bootstrap_link'),
+    path('country/<int:country_id>', views.single_country, name='single_country'),
+    path('cities/<int:city_id>', views.single_city, name='single_country'),
+    path('cities/<int:city_id>/delete', views.delete_city, name='single_country'),
 ]
