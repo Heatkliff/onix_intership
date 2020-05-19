@@ -17,10 +17,8 @@ def index(request, template="locations/country_list.html"):
 @login_required
 def single_country(request, country_id, template="locations/country.html"):
     country = get_object_or_404(Country, id=country_id)
-    cities_list = City.objects.filter(country=country)
     content = {
         'country': country,
-        'cities': cities_list
     }
     return render(request, template, content)
 

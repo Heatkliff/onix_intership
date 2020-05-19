@@ -47,7 +47,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for city in cities %}
+                    {% for city in country.city_set.all %}
                     <tr>
                         <td>
                             <a href="/locations/cities/{{city.id}}">
