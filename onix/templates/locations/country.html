@@ -10,11 +10,16 @@
 
 {% block content %}
 <header class="d-flex justify-content-end container p-4">
+    <div class="create-city">
+        <a href="{% url 'create_city' %}">Create city</a>
+    </div>
+    <div class="create-country">
+        <a href="{% url 'create_country' %}">Create country</a>
+    </div>
     <div class="log-out">
         <a href="{% url 'logout' %}">Log-out</a>
     </div>
 </header>
-
 <div class="container">
     <div class="row">
         <div class="col-6">
@@ -34,6 +39,9 @@
                 <div class="col-6">Cities_count:</div>
                 <div class="col-6">{{ country.cities_count }}</div>
             </div>
+            <div class="row p-4">
+                <div class="col-6"><a class="btn btn-default" href="{% url 'update_country' country_id=country.id %}">Edit</a></div>
+            </div>
         </div>
         <div class="col-6">
             <div class="table-wrapper-scroll-y my-custom-scrollbar"
@@ -50,7 +58,7 @@
                     {% for city in country.city_set.all %}
                     <tr>
                         <td>
-                            <a href="/locations/cities/{{city.id}}">
+                            <a href="{% url 'single_city' city_id=city.id %}">
                                 {{city.name}}
                             </a>
                         </td>

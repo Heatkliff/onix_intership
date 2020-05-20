@@ -10,9 +10,15 @@
 
 {% block content %}
 <header class="d-flex justify-content-end container p-4">
-        <div class="log-out">
-            <a href="{% url 'logout' %}">Log-out</a>
-        </div>
+    <div class="create-city">
+        <a href="{% url 'create_city' %}">Create city</a>
+    </div>
+    <div class="create-country">
+        <a href="{% url 'create_country' %}">Create country</a>
+    </div>
+    <div class="log-out">
+        <a href="{% url 'logout' %}">Log-out</a>
+    </div>
 </header>
 <div class="bg-primary text-white">
     <div class="container">
@@ -50,6 +56,7 @@
     </a>
     {% endfor %}
 </div>
+
 {% endblock %}
 
 {% block scripts_extra %}

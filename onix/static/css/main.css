@@ -1,0 +1,29 @@
+.list-country{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 600px;
+	width: 300px;
+	/*background-color: black;*/
+}
+
+.list-country .list-country-container {
+	display: block;
+	position: relative;
+	height: 100%;
+	overflow: auto;
+}
+
+.list-country .list-country-container .list-country-container_element {
+	display: block;
+	width: 100%;
+}
+
+header .create-city {
+	margin-right: 15px
+}
+
+
+header .create-country {
+	margin-right: 15px
+}

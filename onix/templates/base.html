@@ -6,8 +6,19 @@
         {% block title %} {% endblock %}
     </title>
     {% block styles_extra %} {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href={% static "css/main.css" %}>
 </head>
 <body>
+    <div class="list-country">
+        <div class="list-country-container">
+            {% for country in request.countries_list %}
+                <a href="/locations/country/{{country.id}}" class="list-country-container_element">
+                    {{ country.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
     {% block content %} {% endblock %}
     {% block scripts_extra %} {% endblock %}
 </body>
