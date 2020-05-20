@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'locations.apps.LocationsConfig',
     'accounts.apps.AccountsConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'rest_framework',
+    'locations_api'
 ]
-
 
 ROOT_URLCONF = 'onix.urls'
 

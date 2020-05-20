@@ -17,3 +17,7 @@ onix/accounts/__pycache__/
 onix/accounts/migrations/__pycache__/
 
 onix/tests/
+
+onix/locations_api/__pycache__/
+
+onix/locations_api/migrations/__pycache__/
