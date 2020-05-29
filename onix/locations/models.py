@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 
 class Symbol(models.Model):
-    image = models.ImageField(null=False, blank=False)
+    image = models.ImageField(null=False, blank=False, upload_to='country/%Y/')
 
     def __str__(self):
         return f"{self.image}"
@@ -28,7 +28,7 @@ class Country(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='cities')
     longitude = models.FloatField(null=False)
     latitude = models.FloatField(null=False)
 
