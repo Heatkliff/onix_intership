@@ -11,10 +11,14 @@ class SymbolSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('image',)
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
+class UserSerializer(serializers.ModelSerializer):
+    date_joined = serializers.ReadOnlyField()
+
+    class Meta(object):
         model = User
-        fields = ('username',)
+        fields = ('id', 'email', 'first_name', 'last_name',
+                  'date_joined', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
 
 
 class CitySerializer(serializers.ModelSerializer):
@@ -62,3 +66,11 @@ class CountrySerializer(serializers.ModelSerializer):
             'cities_count') is not None else instance.cities_count
         instance.save()
         return instance
+
+
+class SchemaCountrySerializer(serializers.ModelSerializer):
+    flag_url = serializers.CharField(min_length=10)
+
+    class Meta:
+        model = Country
+        fields = ('name', 'description', 'population', 'cities_count', 'flag_url')
