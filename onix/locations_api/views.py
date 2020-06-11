@@ -13,6 +13,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.base_user import BaseUserManager
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.utils import json
+from locations_api.tasks import country_created, country_updated
 
 import requests
 import django_filters.rest_framework
@@ -22,7 +23,7 @@ class CountryApiView(RetrieveUpdateDestroyAPIView):
     serializer_class = CountrySerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     queryset = Country.objects.all()
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get_queryset(self, country_id):
         try:
@@ -50,6 +51,7 @@ class CountryApiView(RetrieveUpdateDestroyAPIView):
         serializer = CountrySerializer(country, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            task = country_updated.delay(request.user.email, country.name, str(request.get_host()) + str(request.path))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -64,6 +66,7 @@ class CountryApiView(RetrieveUpdateDestroyAPIView):
         serializer = CountrySerializer(country, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            task = country_updated.delay(request.user.email, country.name, str(request.get_host()) + str(request.path))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -101,6 +104,7 @@ class CountriesApiView(ListCreateAPIView):
         serializer = CountrySerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
+            task = country_created.delay(request.user.email)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

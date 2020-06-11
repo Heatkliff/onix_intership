@@ -21,3 +21,5 @@ onix/tests/
 onix/locations_api/__pycache__/
 
 onix/locations_api/migrations/__pycache__/
+
+onix/locations/management/commands/__pycache__/

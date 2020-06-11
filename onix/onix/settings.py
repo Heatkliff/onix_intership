@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'onix_db',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'developer',
+        'PASSWORD': '12345678',
         'PORT': '3306',
         'HOST': 'localhost',
     }
@@ -94,6 +94,13 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': timedelta(seconds=3000),
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
+
+# REDIS related settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -115,9 +122,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        "rest_framework.authentication.SessionAuthentication",  # new
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "fgbadaxcw@gmail.com"
+EMAIL_HOST_PASSWORD = "qawsedrftgyh"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
